@@ -1,0 +1,7 @@
+/test
+.eslintignore
+.eslintrc
+.gitignore
+.gitlab-ci.yml
+.npmignore
+verify_commit_msg.js
