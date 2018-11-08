@@ -4,7 +4,8 @@
   "description": "http proxy middleware of koa2",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fix": "eslint --format node_modules/eslint-friendly-formatter . --fix"
   },
   "author": "Mayness",
   "license": "MIT",
