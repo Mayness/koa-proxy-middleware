@@ -1,3 +1,3 @@
-const { proxy } = require('./lib/proxy')
-
-exports.default = proxy;
+'use strict';
+const proxy = require('./lib/proxy');
+module.exports = proxy;
