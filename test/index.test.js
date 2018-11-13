@@ -26,7 +26,6 @@ beforeAll(() => {
         case '/upload': res = 'success'; break;
         case '/other/entry': res = ctx.request.body; break;
         case '/singleNoRewrite/entry': res = ctx.request.body; break;
-        case '/allNoRewrite2': res = ctx.request.body; break;
         default: break;
       }
     }
@@ -80,7 +79,7 @@ describe('koa-nginx in bodyparser Middleware test', () => {
           context: 'notFound',
         },
       ],
-      proxyRes: proxyObj => {
+      handleRes: proxyObj => {
         const { proxyRes, req } = proxyObj;
         proxyRes.headers.token = req.headers.newtoken;
       },
@@ -165,7 +164,7 @@ describe('koa-nginx in bodyparser Middleware test', () => {
       .query({
         test: 2222,
       });
-    expect(res.body.data).toBeUndefined();
+    expect(res.status).toBe(404);
     done();
   });
 
@@ -187,10 +186,6 @@ describe('all rewrite false test', () => {
         {
           host: 'http://localhost:3333/',
           context: 'allNoRewrite1',
-        },
-        {
-          host: 'http://localhost:3333/',
-          context: 'allNoRewrite2',
         },
       ],
     });

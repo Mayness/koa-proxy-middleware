@@ -1,12 +1,27 @@
 {
   "name": "koa-proxy-middleware",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "http proxy middleware of koa2",
   "main": "index.js",
   "scripts": {
-    "test": "npm run fix && jest",
+    "test": "rimraf coverage && npm run fix && jest",
+    "coverage": "codecov -f coverage/coverage-final.json",
     "fix": "eslint --format node_modules/eslint-friendly-formatter . --fix"
   },
+  "jest": {
+    "verbose": true,
+    "browser": false,
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "util"
+    ]
+  },
+  "keywords": [
+    "koa-proxy-middleware",
+    "koa-proxy",
+    "koa-middleware",
+    "koa2-proxy"
+  ],
   "author": "Mayness",
   "license": "MIT",
   "devDependencies": {
@@ -19,11 +34,22 @@
     "koa-compose": "^4.1.0",
     "power-assert": "^1.6.1",
     "querystring": "^0.2.0",
-    "supertest": "^3.3.0"
+    "supertest": "^3.3.0",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {
     "dayjs": "^1.7.7",
     "http-proxy": "^1.17.0",
     "winston": "^3.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mayness/koa-proxy-middleware"
+  },
+  "bugs": {
+    "url": "https://github.com/Mayness/koa-proxy-middleware/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
