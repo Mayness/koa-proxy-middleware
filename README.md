@@ -15,11 +15,11 @@ Middleware for [koa2](https://github.com/koajs/koa). Reverse proxy middleware fo
 
 # Require
 
-node v7.x +
+node v8.x +
 
 # Installation
 
-First install node.js(v7.6.0 or higher). Then:
+First install node.js(v8.0.0 or higher). Then:
 
 ```bash
 $ npm i koa-proxy-middleware --save
