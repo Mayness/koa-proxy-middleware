@@ -1,6 +1,6 @@
 {
   "name": "koa-proxy-middleware",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "http proxy middleware of koa2",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,7 @@
   "author": "Mayness",
   "license": "MIT",
   "devDependencies": {
+    "codecov": "^3.1.0",
     "eslint": "^5.8.0",
     "eslint-config-egg": "^7.1.0",
     "eslint-friendly-formatter": "^4.0.1",
@@ -34,8 +35,8 @@
     "koa-compose": "^4.1.0",
     "power-assert": "^1.6.1",
     "querystring": "^0.2.0",
-    "supertest": "^3.3.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "supertest": "^3.3.0"
   },
   "dependencies": {
     "dayjs": "^1.7.7",
