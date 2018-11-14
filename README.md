@@ -26,7 +26,7 @@ When you request url contains terminal, it will transmit to http://127.0.0.1:300
 
 ```
 const Koa = require('koa');
-const Proxy = require('koa-nginx');
+const Proxy = require('koa-proxy-middleware');
 const app = new Koa();
 const Nginx = Proxy.proxy({
   proxies: [
