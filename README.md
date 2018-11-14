@@ -19,11 +19,7 @@ node v8.x +
 
 # Installation
 
-First install node.js(v8.0.0 or higher). Then:
-
-```bash
-$ npm i koa-proxy-middleware --save
-```
+[![NPM](https://nodei.co/npm/koa-proxy-middleware.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/koa-proxy-middleware/)
 
 # Usage
 When you request url contains terminal, it will transmit to http://127.0.0.1:3000/ !
