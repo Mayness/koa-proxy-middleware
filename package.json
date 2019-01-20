@@ -1,6 +1,6 @@
 {
   "name": "koa-proxy-middleware",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "http proxy middleware of koa2",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,6 @@
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "^4.1.0",
-    "power-assert": "^1.6.1",
     "querystring": "^0.2.0",
     "rimraf": "^2.6.2",
     "supertest": "^3.3.0"
@@ -41,7 +40,8 @@
   "dependencies": {
     "dayjs": "^1.7.7",
     "http-proxy": "^1.17.0",
-    "winston": "^3.1.0"
+    "winston": "^3.1.0",
+    "power-assert": "^1.6.1"
   },
   "repository": {
     "type": "git",
