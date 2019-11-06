@@ -22,13 +22,13 @@ node v8.x +
 [![NPM](https://nodei.co/npm/koa-proxy-middleware.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/koa-proxy-middleware/)
 
 # Usage
-When you request url contains terminal, it will transmit to http://127.0.0.1:3000/ !
-
+``koa-proxy-middleware`` is used to forward HTTP requests in koa middleware,it look like the nginx in Node.   
+example:
 ```
 const Koa = require('koa');
 const Proxy = require('koa-proxy-middleware');
 const app = new Koa();
-const Nginx = Proxy.proxy({
+const proxy = new Proxy({
   proxies: [
     {
       host: 'http://localhost:3333/',
@@ -36,23 +36,33 @@ const Nginx = Proxy.proxy({
     },
   ]
 });
-app.use(Nginx);
+app.use(proxy);
 app.listen(3000);
     
 ```
 # API
 ### Options
 
-- `proxyTimeout`
-timeout for outgoing proxy requests.unrequired,the values are in millisecond,Number,default 30000
+- `proxies`  
+``koa-proxy-middleware`` config option,expect ``Array``,Each of the config objects is a proxy combination, you should fill this option with client require ``context`` prefix and ``host`` server address.
+  * `host` url string to be parsed with the url module
+  * `context` Local proxy root address,required,string format
+  * `rewrite` unrequired，``Function`` or ``Boolean``. It doesn't overwrite the path when it's false.
+  * `proxyTimeout` unrequired，``Number``
 
-- `rewrite`
-rewrites the url redirects.unrequired,Funtion, default `path.replace(context, '')`，context before with '/', the second param does not require '/', because the `http-proxy` will do this
+- `proxyTimeout`  
+timeout(in millis) for outgoing proxy requests. unrequired,default 30000
 
-- `handleReq`
-This event is emitted before the data is sent. It gives you a chance to alter the proxyReq request object. Applies to "web",include `proxyReq`,`req`,`res`,`options`
+- `rewrite`  
+rewrites the url redirects function.unrequired, default `() => path.replace(context, '')`，context before with '/', the second param does not require '/', because funciton ``rewrite`` will do this in [http-proxy](https://github.com/nodejitsu/node-http-proxy) 
+
+- `logLevel`  
+Log level of terminal output, inclue `error`, `warn`, `info`, `http`, `verbose`, `debug`, `debug`, `silly`, it dependence on [Winston](https://github.com/winstonjs/winston) package
+
+- `handleReq`  
+This function is triggered before send data. you can modify the request object of proxyReq and it will be returned with four arguments `proxyReq`,`req`,`res`,`options`
 ```js
-const Nginx = Proxy.proxy({
+const proxy = new Proxy({
   proxies: ...,
   handleReq: proxyObj => {
     { proxyReq, req, res, options } = proxyObj;
@@ -60,25 +70,18 @@ const Nginx = Proxy.proxy({
 });
 ```
 
-- `handleRes`
-This event is emitted if the request to the target got a response,include `proxyRes`,`req`,`res`
+- `handleRes`  
+This function is triggered if the request to the target got a response,three arguments includes `proxyRes`,`req`,`res`
 
-- `error`
-The error event is emitted if the request to the target fail,include `err`,`req`,`res`
-
-- `proxies`
-koa-proxy-middleware important parameter,required,expect get array,Each of the internal objects is a proxy combination, and some of the internal parameters can override globally parameters of the same name.
-  * `target` url string to be parsed with the url module
-  * `context` Local proxy root address,required,string format
-  * `rewrite` unrequired，Function or Boolean. It doesn't overwrite the path when it's false.
-  * `proxyTimeout` unrequired，Number
+- `error`  
+The error function is triggered if the request to the target server fail,three arguments includes `err`,`req`,`res`
 
 Most options based on [http-proxy](https://github.com/nodejitsu/node-http-proxy). 
 * host: the end point server
 * context: the request url contains the 'context' will be proxy
 
 ```js
-const Nginx = Proxy.proxy({
+const proxy = new Proxy({
   proxies: [
     {
       target: 'http://127.0.0.1:3000',
@@ -93,5 +96,5 @@ const Nginx = Proxy.proxy({
   proxyTimeout: 5000,
   ...
 });
-app.use(Nginx);
+app.use(proxy);
 ```
