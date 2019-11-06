@@ -58,7 +58,7 @@ describe('koa-nginx in bodyparser Middleware test', () => {
   let agent;
   beforeAll(() => {
     const app = new Koa();
-    const nginx = Proxy.proxy({
+    const proxy = new Proxy({
       proxies: [
         {
           host: 'http://localhost:3333/',
@@ -92,7 +92,7 @@ describe('koa-nginx in bodyparser Middleware test', () => {
       },
     });
     app.use(bodyParser());
-    app.use(nginx);
+    app.use(proxy);
     serverNginx = app.listen();
     agent = request.agent(serverNginx);
   });
@@ -180,7 +180,7 @@ describe('all rewrite false test', () => {
   let agent;
   beforeAll(() => {
     const app = new Koa();
-    const nginx = Proxy.proxy({
+    const proxy = new Proxy({
       rewrite: false,
       proxies: [
         {
@@ -190,7 +190,7 @@ describe('all rewrite false test', () => {
       ],
     });
     app.use(bodyParser());
-    app.use(nginx);
+    app.use(proxy);
     serverNginx = app.listen(5555);
     agent = request.agent(serverNginx);
   });
