@@ -71,7 +71,7 @@ const proxy = new Proxy({
 ```
 
 - `handleRes`  
-The function will be triggered if back response from the target server,three arguments `proxyRes`,`req`,`res`
+The function will be triggered if back response from the target server.It takes three arguments `proxyRes`,`req`,`res`
 
 - `error`  
-The error function will be triggered when fail in request to the target server,three arguments `err`,`req`,`res`
+The error function will be triggered when fail in request to the target server.It takes three arguments `err`,`req`,`res`
