@@ -19,6 +19,7 @@ beforeAll(() => {
         case '/': res = 'server is listen at port 3333'; break;
         case '/getMethod': res = ctx.query; break;
         case '/allNoRewrite1': res = ctx.query; break;
+        case '/cc/dd': res = ctx.query; break;
         default: break;
       }
     } else if (ctx.method === 'POST') {
@@ -63,6 +64,10 @@ describe('koa-nginx in bodyparser Middleware test', () => {
         {
           host: 'http://localhost:3333/',
           context: 'nginx',
+        },
+        {
+          host: 'http://localhost:3333/',
+          context: 'aa/bb',
         },
         {
           host: 'http://localhost:3333/',
@@ -120,6 +125,17 @@ describe('koa-nginx in bodyparser Middleware test', () => {
       .send({});
     expect(res.body.data.body).toEqual({});
     expect(res.body.data.query.test2).toBe('2222');
+    done();
+  });
+
+  test('multilevel path test', async done => {
+    const res = await agent.get('/aa/bb/cc/dd')
+      .set('newtoken', 'tokenPassword')
+      .query({
+        test: 2222,
+      });
+    expect(res.header.token).toBe('tokenPassword');
+    expect(res.body.data.test).toBe('2222');
     done();
   });
 
